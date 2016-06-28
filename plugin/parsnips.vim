@@ -22,7 +22,7 @@ function! DocumentationHeader(input)
     let l:comment = '//'
     let l:purpose = '//@PURPOSE: '
     let l:classes = '//@CLASSES: '
-    let l:class   = '//  ' . a:input . ': ' 
+    let l:class   = '//  ' . a:input . ': '
     let l:seeAlso = '//@SEE_ALSO: '
     let l:description = '//@DESCRIPTION: '
     return [l:purpose, l:comment, l:classes, l:class, l:comment, l:seeAlso,
