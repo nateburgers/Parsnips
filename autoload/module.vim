@@ -3,7 +3,7 @@
 "@PURPOSE: Provide a mechanism for loading vim scripts
 "
 "@CLASSES:
-"  
+"
 "@SEE_ALSO:
 "
 "@DESCRIPTION:
@@ -39,4 +39,7 @@ function! module#load(name)
 endfunction
 
 let s:Cursor = module#load("bvp/bvpt/bvpt_cursor")
-echom s:Cursor.row()
+let s:qursor = s:Cursor.new(20, 10)
+call s:qursor.diff(3, 0)
+let s:low    = s:qursor.row()
+echom s:low
