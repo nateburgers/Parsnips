@@ -8,6 +8,10 @@
 "endif
 "let g:loaded_cursor = 1
 
+" class IOList
+function IOList_New()
+endfunctio
+
                          " ==============
                          " INITIALIZATION
                          " ==============
@@ -65,4 +69,3 @@ endfunction
 
 " Usage
 let s:cursor = cursor#new(3, 3)
-call cursor#delete(s:cursor)
