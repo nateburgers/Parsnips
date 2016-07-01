@@ -38,8 +38,26 @@ function! module#load(name)
     endif
 endfunction
 
-let s:Cursor = module#load("bvp/bvpt/bvpt_cursor")
-let s:qursor = s:Cursor.new(20, 10)
-call s:qursor.diff(3, 0)
-let s:low    = s:qursor.row()
-echom s:low
+let s:Kursor = module#load("bvp/bvpt/bvpt_cursor")
+let s:kursor = s:Kursor.new(41, 2)
+"call s:kursor.setVisible(1)
+
+let s:snippetUtil = module#load("bvp/bvpu/bvpu_snippetutil")
+let s:comment   = '//'
+let s:header    = s:snippetUtil.fileHeader("test.js", "JavaScript", s:comment, 79)
+let s:purpose   = s:snippetUtil.purpose(s:comment)
+let s:banner    = s:snippetUtil.testBanner("HELPER CLASSES", s:comment, 79)
+let s:copyright = s:snippetUtil.copyright(s:comment, 79)
+
+let s:snippet = join([s:header, s:purpose, s:banner, s:copyright], "\r")
+for s:line in s:snippetUtil.getLines(s:snippet)
+    echom s:line
+endfor
+
+function! InsertSnippet()
+    let l:line = line(".")
+    let l:lines = s:snippetUtil.getLines(s:snippet)
+    call append(l:line, l:lines)
+endfunction
+
+nmap <C-s> :call InsertSnippet()<CR>

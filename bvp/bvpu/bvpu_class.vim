@@ -48,11 +48,15 @@ function! BVPU_CLASS(Load)
         call extend(l:newClass, a:spec.static)
         function l:newClass.new(...) dict
             let l:object = {}
-            call extend(l:object, deepcopy(self.d_definition.private))
-            call extend(l:object, deepcopy(self.d_definition.public))
+            let l:object.private = {}
+            call extend(l:object.private, deepcopy(self.d_definition.private))
+            call extend(l:object,         deepcopy(self.d_definition.public))
             call call(self.d_definition.init, a:000, l:object)
             return l:object
         endfunction
+        if has_key(l:newClass, 'init')
+            call l:newClass.init()
+        endif
         return l:newClass
     endfunction
 
